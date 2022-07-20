@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ShelterTracker</string>
+    <string name="app_name">Shelter Tracker</string>
+    <string name="ok">OK</string>
 </resources>

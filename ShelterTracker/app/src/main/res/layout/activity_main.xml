@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity"
     android:padding="10dp">
 
     <Button
+        android:id="@+id/show_shelter_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show Shelter List"
+        android:textSize="30sp"
         android:onClick="showShelterList"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <Button
+        android:id="@+id/show_dialog_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Show Dialog"
+        android:onClick="showDialog"/>
+
+</LinearLayout>

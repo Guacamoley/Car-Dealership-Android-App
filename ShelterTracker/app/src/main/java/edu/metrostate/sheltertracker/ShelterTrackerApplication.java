@@ -33,6 +33,8 @@ public class ShelterTrackerApplication extends Application {
         // this will put files in the /sdcard/Android/data/edu.metrostate.sheltertracker/files directory
         File externalDir = getExternalFilesDir(null);
 
+        File internalDir = getFilesDir();
+
         File outputFile = new File(externalDir, "myfile.txt");
 
         try {
