@@ -15,6 +15,9 @@ public class CarDealerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+        //TODO: Remove this code
         for(int i = 0; i < 20; i++) {
             vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
         }
@@ -27,6 +30,7 @@ public class CarDealerApplication extends Application {
 
     public void writeFile() {
 
+        //TODO: Remove this code
         // Gets the output path which is /sdcard/Android/data/edu.metrostate.cardealer/files directory
         File externalDir = getExternalFilesDir(null);
 
