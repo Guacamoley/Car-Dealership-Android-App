@@ -1,14 +1,14 @@
 package edu.metrostate.cardealer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VehicleListActivity extends AppCompatActivity {
 
@@ -24,13 +24,14 @@ public class VehicleListActivity extends AppCompatActivity {
         VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList());
 
         // Find the list view and add the adapter
-        ListView vehicleList = ((ListView)findViewById(R.id.vehicle_list));
+        ListView vehicleList = findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(adapter);
 
         vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showDialog(adapter.getItem(position));
+               Intent intent = new Intent (VehicleListActivity.this, VehicleActivity.class );
+               startActivity(intent);
             }
         });
 

@@ -7,13 +7,46 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/show_vehicle"
+        android:id="@+id/importButton"
+        android:layout_width="130dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="65dp"
+        android:text="Import"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ExportButton"
+        app:layout_constraintTop_toBottomOf="@+id/dealer_list"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <TextView
+        android:id="@+id/dealer_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Car List"
+        android:layout_margin="10dp"
+        android:text="@string/dealer_list"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/dealer_list"
+        android:layout_width="369dp"
+        android:layout_height="529dp"
+        android:layout_marginBottom="136dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dealer_title"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <Button
+        android:id="@+id/ExportButton"
+        android:layout_width="130dp"
+        android:layout_height="65dp"
+        android:text="Export"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/importButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dealer_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

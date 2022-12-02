@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CarDealerApplication extends Application {
     private final List<Vehicle> vehicleList = new ArrayList<>();
-
+    private final List<Dealer> dealerList = new ArrayList<>();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -21,12 +21,17 @@ public class CarDealerApplication extends Application {
         for(int i = 0; i < 20; i++) {
             vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
         }
+        //TODO: Remove this code
+        for(int i = 0; i < 20; i++) {
+            dealerList.add(new Dealer(Integer.toString(i)));
+        }
 
     }
 
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
+    public List<Dealer> getDealerList() {return dealerList;}
 
     public void writeFile() {
 
