@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CarDealer</string>
     <string name="dealer_list">Dealer List</string>
+    <string name="dealer_name">Dealer Name</string>
 </resources>

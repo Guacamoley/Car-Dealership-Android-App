@@ -6,47 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/importButton"
-        android:layout_width="130dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="65dp"
-        android:text="Import"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ExportButton"
-        app:layout_constraintTop_toBottomOf="@+id/dealer_list"
-        app:layout_constraintVertical_bias="0.529" />
-
     <TextView
         android:id="@+id/dealer_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="49dp"
         android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
         android:text="@string/dealer_list"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/dealer_list"
-        android:layout_width="369dp"
-        android:layout_height="529dp"
-        android:layout_marginBottom="136dp"
+        android:layout_width="364dp"
+        android:layout_height="642dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dealer_title"
-        app:layout_constraintVertical_bias="0.476" />
-
-    <Button
-        android:id="@+id/ExportButton"
-        android:layout_width="130dp"
-        android:layout_height="65dp"
-        android:text="Export"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/importButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dealer_list" />
+        app:layout_constraintTop_toBottomOf="@+id/dealer_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,26 @@
 package edu.metrostate.cardealer;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     Button exportButton;
     Button importButton;
+
+
+    //This code is replaced by the Options Menu below
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,28 +34,41 @@ public class MainActivity extends AppCompatActivity {
         DealerAdapter ad = new DealerAdapter(this, app.getDealerList());
         ListViewDealer.setAdapter(ad);
 
-      ListViewDealer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-              Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
-              startActivity(intent);
-          }
-      });
+        ListViewDealer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
-    public void showDialog(Vehicle vehicle) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.test_menu, menu);
+        return true;
+    }
 
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle("My alert")
-                .setCancelable(false)
-                .setTitle("Vehicle ID: " + vehicle.getId())
-                .setMessage("Model: " + vehicle.getModel())
-                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "Item 2 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "Item 3 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.switch1:
 
-        dialog.show();
-
-
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
+
 }
