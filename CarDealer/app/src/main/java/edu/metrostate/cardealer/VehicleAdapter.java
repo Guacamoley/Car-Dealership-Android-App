@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class VehicleAdapter extends ArrayAdapter<Vehicle> {
-    public VehicleAdapter(Context context, List<Vehicle> shelterList) {
+public class VehicleAdapter extends ArrayAdapter<Car> {
+    public VehicleAdapter(Context context, List<Car> shelterList) {
         super(context, R.layout.vehicle_item, shelterList);
     }
 

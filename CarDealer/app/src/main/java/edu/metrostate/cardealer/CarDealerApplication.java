@@ -10,28 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDealerApplication extends Application {
-    private final List<Vehicle> vehicleList = new ArrayList<>();
-    private final List<Dealer> dealerList = new ArrayList<>();
+    private final List<Car> vehicleList = new ArrayList<>();
+    private final List<Dealership> dealerList = new ArrayList<>();
     @Override
     public void onCreate() {
         super.onCreate();
 
 
         //TODO: Remove this code
-        for(int i = 0; i < 20; i++) {
-            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
+        for(int i = 0; i < 5; i++) {
+            dealerList.add(new Dealership(Integer.toString(i)));
         }
         //TODO: Remove this code
         for(int i = 0; i < 20; i++) {
-            dealerList.add(new Dealer(Integer.toString(i)));
+            for(int j = 0; j < 5; j++) {
+                vehicleList.add(new Car(Integer.toString(j), Integer.toString(i)));
+            }
         }
 
     }
 
-    public List<Vehicle> getVehicleList() {
+    public List<Car> getVehicleList() {
         return vehicleList;
     }
-    public List<Dealer> getDealerList() {return dealerList;}
+    public List<Dealership> getDealerList() {return dealerList;}
 
     public void writeFile() {
 
