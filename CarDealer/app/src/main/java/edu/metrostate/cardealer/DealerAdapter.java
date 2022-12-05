@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class DealerAdapter extends ArrayAdapter<Dealer> {
-    public DealerAdapter(Context context, List<Dealer> shelterList) {
+public class DealerAdapter extends ArrayAdapter<Dealership> {
+    public DealerAdapter(Context context, List<Dealership> shelterList) {
         super(context, R.layout.dealer_item, shelterList);
     }
 
