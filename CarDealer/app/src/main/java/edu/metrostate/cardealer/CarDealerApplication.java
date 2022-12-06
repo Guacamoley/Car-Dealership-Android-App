@@ -11,6 +11,8 @@ import java.util.List;
 
 public class CarDealerApplication extends Application {
     private final Inventory inv = new Inventory();
+    public static Dealership selectedDealer;
+    public static Car selectedCar;
 
     @Override
     public void onCreate() {

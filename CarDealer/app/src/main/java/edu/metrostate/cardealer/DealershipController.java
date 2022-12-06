@@ -82,6 +82,12 @@ public class DealershipController {
         // add car to dealership
         dealership.addCar(car);
 
+        // if car came with a dealer name, update dealer name accordingly
+        String dealerName = car.getDealerName();
+        if(dealerName != null && !dealerName.equals("")) {
+            dealership.setName(car.getDealerName());
+        }
+
         // returns success because the car was successfully added
         return Status.SUCCESS;
     }

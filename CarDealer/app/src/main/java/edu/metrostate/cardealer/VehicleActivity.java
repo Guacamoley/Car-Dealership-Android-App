@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class VehicleActivity extends AppCompatActivity {
 
     Button car_button;
+    Car myCar = CarDealerApplication.selectedCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

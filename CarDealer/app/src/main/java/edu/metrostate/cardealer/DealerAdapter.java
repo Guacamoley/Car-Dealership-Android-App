@@ -29,7 +29,7 @@ public class DealerAdapter extends ArrayAdapter<Dealership> {
         TextView id = convertView.findViewById(R.id.dealer_name);
 
 
-        id.setText("Dealer " + getItem(position).getName());
+        id.setText(getItem(position).getName());
 
 
         return convertView;
