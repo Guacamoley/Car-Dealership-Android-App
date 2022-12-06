@@ -50,7 +50,7 @@ public class Inventory {
     public List<Status> importFile(File file, String extension) {
         if (extension.matches("json"))
             return dc.addCars(c.readFile(file));
-        else if(extension.matches("xml"))
+        else if (extension.matches("xml"))
             //return dc.addCars(xml.xmlUnmarshal(file));
             return null;
         return null;
@@ -215,13 +215,46 @@ public class Inventory {
      * @param vehicleID   The car that is getting transferred.
      */
     public void transferCar(String dealership1, String dealership2, String vehicleID) {
-        for (Car car : getDealerCars(dealership1)) {
-            if (car.getId().equalsIgnoreCase(vehicleID)) {
-                car.setDealershipId(dealership2);
-                addIncomingVehicle(car);
-                getDealerCars(dealership1).remove(car);
-                break;
+        if (transferCarLogic(dealership1, dealership2, vehicleID)) {
+            for (Car car : getDealerCars(dealership1)) {
+                if (car.getId().equalsIgnoreCase(vehicleID)) {
+                    car.setDealershipId(dealership2);
+                    addIncomingVehicle(car);
+                    getDealerCars(dealership1).remove(car);
+                    break;
+                }
             }
         }
     }
+
+    /**
+     * Logic used for transferCar method. Checks if dealer acquisition is enabled and if the
+     * dealerID is the same as the transfer dealer. Checks if dealer1 has the car in its inventory.
+     * Checks if car is loaned out. If all are false, then returns true.
+     *
+     * @param dealership1 The dealership to transfer a vehicle from.
+     * @param dealership2 The dealership to transfer a vehicle to.
+     * @param vehicleID   The car that is getting transferred.
+     * @return false If one of the parameters is flagged.
+     * @return true If every parameter passes.
+     */
+    private boolean transferCarLogic(String dealership1, String dealership2, String vehicleID) {
+        if (getDealerAcquisition(dealership2) && dealership2.equalsIgnoreCase(dealership1))
+            return false;
+        if (!getDealerCars(dealership1).toString().contains(vehicleID))
+            return false;
+        Car carTransfer = getCarObject(dealership1, vehicleID);
+        return !carTransfer.isLoaned();
+    }
+
+    // Method for returning a new car object with passed in dealerID and carID.
+    private Car getCarObject(String dealerID, String carID) {
+        for (Car car : this.getDealerCars(dealerID)) {
+            if (car.getId().equals(carID)) {
+                return car;
+            }
+        }
+        return null;
+    }
+
 }
