@@ -10,30 +10,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDealerApplication extends Application {
-    private final List<Car> vehicleList = new ArrayList<>();
-    private final List<Dealership> dealerList = new ArrayList<>();
+    private final Inventory inv = new Inventory();
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-
-        //TODO: Remove this code
-        for(int i = 0; i < 5; i++) {
-            dealerList.add(new Dealership(Integer.toString(i)));
-        }
-        //TODO: Remove this code
-        for(int i = 0; i < 20; i++) {
-            for(int j = 0; j < 5; j++) {
-                vehicleList.add(new Car(Integer.toString(j), Integer.toString(i)));
-            }
+        // TODO: this is sample data. remove this eventually.
+        ArrayList<Car> sampleData = new ArrayList<Car>();
+        sampleData.add(new Car("12513", "suv", "Ford", "Explorer", "48934j", 20123d, 1515354694451l, "", "", false));
+        sampleData.add(new Car("12513", "sedan", "Tesla", "Model 3", "83883", 50444d, 1515354694451l, "", "", false));
+        sampleData.add(new Car("12513", "pickup", "Chevy", "Silverado", "89343883", 70444d, 1515354694451l, "", "", false));
+        sampleData.add(new Car("77338", "sports car", "Toyota", "Supra", "229393", 49889d, 1515354694451l, "", "", false));
+        sampleData.add(new Car("485", "suv", "Land Rover", "Range Rover", "848432", 17000d, 1515354694451l, "Wacky Bob's Automall", "pounds", false));
+        sampleData.add(new Car("485", "pickup", "Toyota", "Tundra", "52523", 22600d, 1515354694451l, "Wacky Bob's Automall", "dollars", false));
+        sampleData.add(new Car("485", "sedan", "Genesis", "G70", "151e5dde", 36600d, 1515354694451l, "Wacky Bob's Automall", "dollars", false));
+        sampleData.add(new Car("485", "sports car", "Mazda", "Miata", "ern222", 22330d, 1515354694451l, "Wacky Bob's Automall", "dollars", false));
+        for (Car c : sampleData){
+            inv.addIncomingVehicle(c);
         }
 
     }
 
-    public List<Car> getVehicleList() {
-        return vehicleList;
+    public List<Car> getVehicleList(String dealerId) {
+        return inv.getDealerCars(dealerId);
     }
-    public List<Dealership> getDealerList() {return dealerList;}
+    public List<Dealership> getDealerList() {
+        return inv.getAllDealerships();
+    }
 
     public void writeFile() {
 

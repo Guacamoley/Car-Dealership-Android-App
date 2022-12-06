@@ -24,7 +24,8 @@ public class VehicleListActivity extends AppCompatActivity {
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
         // Create an adapter for the list view
-        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList());
+        // TODO: hardcoded to show dealer "485". not sure how to retrieve the dealerId that was clicked.
+        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList("485"));
 
         // Find the list view and add the adapter
         ListView vehicleList = findViewById(R.id.vehicle_list);

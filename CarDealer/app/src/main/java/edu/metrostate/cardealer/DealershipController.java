@@ -196,6 +196,14 @@ public class DealershipController {
     }
 
     /**
+     * gets the list of all current dealership objects
+     * @return list of all dealerships
+     */
+    public List<Dealership> getAllDealerships(){
+        return new ArrayList<Dealership>(dealerships.values());
+    }
+
+    /**
      * gets all cars from all dealerships
      *
      * @return the list of all cars

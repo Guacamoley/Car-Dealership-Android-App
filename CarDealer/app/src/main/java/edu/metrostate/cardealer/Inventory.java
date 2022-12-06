@@ -66,6 +66,14 @@ public class Inventory {
     }
 
     /**
+     *
+     * @return list of all dealerships
+     */
+    public List<Dealership> getAllDealerships(){
+        return dc.getAllDealerships();
+    }
+
+    /**
      * adds one new vehicle per assignment requirement #5. returns a status
      * enumeration indicating whether it was successfully added. this
      * requires the car's dealership ID to be non-null. a null car parameter will
