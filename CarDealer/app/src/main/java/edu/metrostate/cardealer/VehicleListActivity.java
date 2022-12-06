@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,9 +24,16 @@ public class VehicleListActivity extends AppCompatActivity {
         // Get the application instance from the activity
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
+        // Get current dealership selected
+        Dealership dealership = CarDealerApplication.selectedDealer;
+
+        // Set title
+        TextView title = findViewById(R.id.title);
+        title.setText(dealership.getName());
+
         // Create an adapter for the list view
         // TODO: hardcoded to show dealer "485". not sure how to retrieve the dealerId that was clicked.
-        String dealerIdSelected = CarDealerApplication.selectedDealer.getDealershipId();
+        String dealerIdSelected = dealership.getDealershipId();
         VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList(dealerIdSelected));
 
         // Find the list view and add the adapter
