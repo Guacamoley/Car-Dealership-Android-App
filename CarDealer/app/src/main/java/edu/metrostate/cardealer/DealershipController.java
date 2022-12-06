@@ -223,4 +223,18 @@ public class DealershipController {
         }
         return allCars;
     }
+
+    public Dealership getDealerById(String dealerId) {
+        return dealerships.get(dealerId);
+    }
+
+    public Car getCarbyId(String dealerId, String vehicleId) {
+        List<Car> dealerCars = getDealershipCars(dealerId);
+        for (Car c : dealerCars) {
+            if (c.getId().equals(vehicleId)){
+                return c;
+            }
+        }
+        return null;
+    }
 }

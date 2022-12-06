@@ -11,4 +11,6 @@
     <string name="button_transfer">Transfer</string>
     <string name="button_loaned">Loaned</string>
     <string name="button_edit_car">Edit Car</string>
+    <string name="button_export_all">Export All</string>
+    <string name="button_delete_car">Delete Car</string>
 </resources>

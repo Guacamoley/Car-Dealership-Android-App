@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDealerApplication extends Application {
-    private final Inventory inv = new Inventory();
-    public static Dealership selectedDealer;
-    public static Car selectedCar;
+    public static final Inventory INVENTORY = new Inventory();
+    //public static Dealership selectedDealer;
+    //public static Car selectedCar;
 
     @Override
     public void onCreate() {
@@ -29,16 +29,16 @@ public class CarDealerApplication extends Application {
         sampleData.add(new Car("485", "sedan", "Genesis", "G70", "151e5dde", 36600d, 1515354694451l, "Wacky Bob's Automall", "dollars", false));
         sampleData.add(new Car("485", "sports car", "Mazda", "Miata", "ern222", 22330d, 1515354694451l, "Wacky Bob's Automall", "dollars", false));
         for (Car c : sampleData){
-            inv.addIncomingVehicle(c);
+            INVENTORY.addIncomingVehicle(c);
         }
 
     }
 
     public List<Car> getVehicleList(String dealerId) {
-        return inv.getDealerCars(dealerId);
+        return INVENTORY.getDealerCars(dealerId);
     }
     public List<Dealership> getDealerList() {
-        return inv.getAllDealerships();
+        return INVENTORY.getAllDealerships();
     }
 
     public void writeFile() {

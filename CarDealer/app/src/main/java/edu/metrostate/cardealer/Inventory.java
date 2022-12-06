@@ -265,4 +265,11 @@ public class Inventory {
         return null;
     }
 
+    public Dealership getDealerById(String dealerId) {
+        return dc.getDealerById(dealerId);
+    }
+
+    public Car getCarById(String dealerId, String vehicleId) {
+        return dc.getCarbyId(dealerId, vehicleId);
+    }
 }

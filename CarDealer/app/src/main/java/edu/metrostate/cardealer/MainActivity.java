@@ -37,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
         ListViewDealer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO: grab the dealerId here, I think?
-                CarDealerApplication.selectedDealer = ad.getItem((int)l);
                 Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
+                intent.putExtra("dealerId", ad.getItem((int)l).getDealershipId());
                 startActivity(intent);
             }
         });

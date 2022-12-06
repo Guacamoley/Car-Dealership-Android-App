@@ -25,7 +25,8 @@ public class VehicleListActivity extends AppCompatActivity {
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
         // Get current dealership selected
-        Dealership dealership = CarDealerApplication.selectedDealer;
+        String dealerId = getIntent().getStringExtra("dealerId");
+        Dealership dealership = CarDealerApplication.INVENTORY.getDealerById(dealerId);
 
         // Set title
         TextView title = findViewById(R.id.title);
@@ -33,8 +34,7 @@ public class VehicleListActivity extends AppCompatActivity {
 
         // Create an adapter for the list view
         // TODO: hardcoded to show dealer "485". not sure how to retrieve the dealerId that was clicked.
-        String dealerIdSelected = dealership.getDealershipId();
-        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList(dealerIdSelected));
+        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList(dealerId));
 
         // Find the list view and add the adapter
         ListView vehicleList = findViewById(R.id.vehicle_list);
@@ -43,8 +43,9 @@ public class VehicleListActivity extends AppCompatActivity {
         vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CarDealerApplication.selectedCar = adapter.getItem((int)id);
                 Intent intent = new Intent (VehicleListActivity.this, VehicleActivity.class );
+                intent.putExtra("dealerId", dealerId);
+                intent.putExtra("vehicleId", adapter.getItem((int)id).getId());
                 startActivity(intent);
             }
         });
