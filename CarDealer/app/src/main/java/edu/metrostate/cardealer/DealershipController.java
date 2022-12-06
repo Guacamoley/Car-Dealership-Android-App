@@ -26,7 +26,7 @@ public class DealershipController {
      * this list should have unique dealership id's since that parameter is used as
      * a search key.
      */
-    private Map<String, Dealership> dealerships;
+    private final Map<String, Dealership> dealerships;
 
     // CONSTRUCTORS
 
@@ -126,7 +126,7 @@ public class DealershipController {
      * dealership id and vehicle id. Multiple vehicles could be removed if they all match.
      *
      * @param dealershipID the dealership id to remove from
-     * @param carID the vehicle id to be removed
+     * @param carID        the vehicle id to be removed
      */
     public void removeCar(String dealershipID, String carID) {
         Dealership dealership = dealerships.get(dealershipID);
@@ -134,7 +134,8 @@ public class DealershipController {
             for (int i = 0; i < dealership.getCars().size(); i++) {
                 Car currentCar = dealership.getCars().get(i);
                 if (currentCar.getId().equals(carID)) {
-                    dealership.getCars().remove(i--);
+                    if (!currentCar.isLoaned())
+                        dealership.getCars().remove(i--);
                 }
             }
         }
