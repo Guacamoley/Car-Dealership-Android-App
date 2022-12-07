@@ -21,13 +21,11 @@
 
         <EditText
             android:id="@+id/title2"
-            android:layout_width="213dp"
+            android:layout_width="274dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:autofillHints="Dealer Name"
-            android:hint="@string/dealer_name_hint"
-            android:inputType="text"
             android:minHeight="48dp"
             android:text="@android:string/unknownName"
             android:textSize="15sp"
@@ -53,43 +51,40 @@
             tools:layout_editor_absoluteY="16dp" />
     </LinearLayout>
 
-
     <ListView
         android:id="@+id/vehicle_list"
-        android:layout_width="350dp"
-        android:layout_height="600dp"
+        android:layout_width="349dp"
+        android:layout_height="534dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
     <Button
         android:id="@+id/button_edit_dealer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="7dp"
         android:layout_marginBottom="16dp"
         android:text="@string/button_add_car"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editNameBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle_list" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_export"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/acquire"
+        android:text="@string/button_export"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editNameBtn"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle_list" />
+        app:layout_constraintHorizontal_bias="0.633"
+        app:layout_constraintStart_toEndOf="@+id/editNameBtn" />
 
     <Button
         android:id="@+id/editNameBtn"
@@ -98,8 +93,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/edit_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle_list" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
