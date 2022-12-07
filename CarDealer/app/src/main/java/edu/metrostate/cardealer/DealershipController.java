@@ -57,7 +57,7 @@ public class DealershipController {
         if (car == null) {
             return Status.FAILURE;
         } else {
-            dealershipId = car.getDealershipId();
+            dealershipId = car.getDealership_id();
         }
 
         // if car has no dealership ID, return failure status
@@ -139,7 +139,7 @@ public class DealershipController {
         if (dealership != null) {
             for (int i = 0; i < dealership.getCars().size(); i++) {
                 Car currentCar = dealership.getCars().get(i);
-                if (currentCar.getId().equals(carID)) {
+                if (currentCar.getVehicle_id().equals(carID)) {
                     if (!currentCar.isLoaned())
                         dealership.getCars().remove(i--);
                 }
@@ -222,5 +222,19 @@ public class DealershipController {
             allCars.addAll(d.getCars());
         }
         return allCars;
+    }
+
+    public Dealership getDealerById(String dealerId) {
+        return dealerships.get(dealerId);
+    }
+
+    public Car getCarbyId(String dealerId, String vehicleId) {
+        List<Car> dealerCars = getDealershipCars(dealerId);
+        for (Car c : dealerCars) {
+            if (c.getVehicle_id().equals(vehicleId)){
+                return c;
+            }
+        }
+        return null;
     }
 }

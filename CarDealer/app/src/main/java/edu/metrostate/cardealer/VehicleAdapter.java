@@ -30,8 +30,8 @@ public class VehicleAdapter extends ArrayAdapter<Car> {
         TextView model = convertView.findViewById(R.id.vehicle_model);
 
 
-        id.setText(getItem(position).getId());
-        model.setText(getItem(position).getModel());
+        id.setText(getItem(position).getVehicle_id());
+        model.setText(getItem(position).getVehicle_model());
 
         return convertView;
     }

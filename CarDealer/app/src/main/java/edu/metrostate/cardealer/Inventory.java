@@ -98,15 +98,15 @@ public class Inventory {
      */
     public Status removeIncomingVehicle(Car target) {
         // check if the car has the necessary fields to search and match
-        if ((target == null || target.getDealershipId() == null) || (target.getId() == null)) {
+        if ((target == null || target.getDealership_id() == null) || (target.getVehicle_id() == null)) {
             return Status.FAILURE;
         } else {
             // based on the car's dealerId, get that dealer's list of cars
-            String dealershipToSearch = target.getDealershipId();
+            String dealershipToSearch = target.getDealership_id();
             for (Car currentCar : dc.getDealershipCars(dealershipToSearch)) {
 
                 // search the list of cars for the matching car using vehicle id
-                if (currentCar.getId().equals(target.getId())) {
+                if (currentCar.getVehicle_id().equals(target.getVehicle_id())) {
 
                     // replace the dealer's car list with a new list of cars which has the target
                     // car removed
@@ -225,8 +225,8 @@ public class Inventory {
     public void transferCar(String dealership1, String dealership2, String vehicleID) {
         if (transferCarLogic(dealership1, dealership2, vehicleID)) {
             for (Car car : getDealerCars(dealership1)) {
-                if (car.getId().equalsIgnoreCase(vehicleID)) {
-                    car.setDealershipId(dealership2);
+                if (car.getVehicle_id().equalsIgnoreCase(vehicleID)) {
+                    car.setDealership_id(dealership2);
                     addIncomingVehicle(car);
                     getDealerCars(dealership1).remove(car);
                     break;
@@ -258,11 +258,22 @@ public class Inventory {
     // Method for returning a new car object with passed in dealerID and carID.
     private Car getCarObject(String dealerID, String carID) {
         for (Car car : this.getDealerCars(dealerID)) {
-            if (car.getId().equals(carID)) {
+            if (car.getVehicle_id().equals(carID)) {
                 return car;
             }
         }
         return null;
     }
 
+    public Dealership getDealerById(String dealerId) {
+        return dc.getDealerById(dealerId);
+    }
+
+    public Car getCarById(String dealerId, String vehicleId) {
+        return dc.getCarbyId(dealerId, vehicleId);
+    }
+
+    public void setCarLoaned(Car car, boolean loaned) {
+        getCarObject(car.getDealership_id(), car.getVehicle_id()).setLoaned(loaned);
+    }
 }

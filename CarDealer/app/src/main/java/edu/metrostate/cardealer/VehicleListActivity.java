@@ -3,6 +3,7 @@ package edu.metrostate.cardealer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +32,8 @@ public class VehicleListActivity extends AppCompatActivity {
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
         // Get current dealership selected
-        Dealership dealership = CarDealerApplication.selectedDealer;
+        String dealerId = getIntent().getStringExtra("dealerId");
+        Dealership dealership = CarDealerApplication.INVENTORY.getDealerById(dealerId);
 
         //Set title
         setTitle(dealership.getName());
@@ -48,10 +50,24 @@ public class VehicleListActivity extends AppCompatActivity {
         saveButton.setVisibility(View.GONE);
 
 
+        // export button, saves json to a single hardcoded location
+        Button exportButton = findViewById(R.id.button_export);
+        exportButton.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String fileName = "test2.json";
+                // saves files to the shared public documents directory
+                String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+
+                // this is the app-specific external storage. the importer has trouble finding files here for some reason.
+                //String dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+
+                CarDealerApplication.INVENTORY.exportFile(dealerId, dir + "/" + fileName);
+            }
+        });
+
         // Create an adapter for the list view
-        // TODO: hardcoded to show dealer "485". not sure how to retrieve the dealerId that was clicked.
-        String dealerIdSelected = dealership.getDealershipId();
-        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList(dealerIdSelected));
+        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList(dealerId));
 
         // Find the list view and add the adapter
         ListView vehicleList = findViewById(R.id.vehicle_list);
@@ -60,8 +76,10 @@ public class VehicleListActivity extends AppCompatActivity {
         vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CarDealerApplication.selectedCar = adapter.getItem((int)id);
                 Intent intent = new Intent (VehicleListActivity.this, VehicleActivity.class );
+                // pass dealerId and vehicleId to the next screen
+                intent.putExtra("dealerId", dealerId);
+                intent.putExtra("vehicleId", adapter.getItem((int)id).getVehicle_id());
                 startActivity(intent);
             }
         });
