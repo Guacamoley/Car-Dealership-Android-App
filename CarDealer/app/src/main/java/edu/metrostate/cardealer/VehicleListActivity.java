@@ -7,10 +7,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +31,20 @@ public class VehicleListActivity extends AppCompatActivity {
         // Get current dealership selected
         Dealership dealership = CarDealerApplication.selectedDealer;
 
-        // Set title
-        TextView title = findViewById(R.id.title);
-        title.setText(dealership.getName());
+        //Set title
+        setTitle(dealership.getName());
+
+        //Set edit title text box
+        EditText editTitle = findViewById(R.id.title2);
+        editTitle.setVisibility(View.GONE);
+
+        //Set Edit Button
+        Button editButton = findViewById(R.id.editNameBtn);
+
+        //Set Save Button
+        Button saveButton = findViewById(R.id.button7);
+        saveButton.setVisibility(View.GONE);
+
 
         // Create an adapter for the list view
         // TODO: hardcoded to show dealer "485". not sure how to retrieve the dealerId that was clicked.
@@ -48,26 +63,41 @@ public class VehicleListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTitle.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dealership.setName(editTitle.getTransitionName());
+            }
+        });
+
+
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.test_menu, menu);
+        inflater.inflate(R.menu.dealer_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item2:
-                Toast.makeText(this, "Item 2 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Item 3 Selected", Toast.LENGTH_SHORT).show();
+            case R.id.switch1:
+                Toast.makeText(this, "Switch turned", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

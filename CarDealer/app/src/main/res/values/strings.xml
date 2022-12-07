@@ -11,4 +11,7 @@
     <string name="button_transfer">Transfer</string>
     <string name="button_loaned">Loaned</string>
     <string name="button_edit_car">Edit Car</string>
+    <string name="edit">Edit</string>
+    <string name="acquisition">Acquisition</string>
+    <string name="save">Save</string>
 </resources>
