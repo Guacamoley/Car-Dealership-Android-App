@@ -38,14 +38,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.code.gson:gson:2.8.7'
 
-    //jaxb testing
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //jaxb dependencies
 
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
 
+    implementation group: 'javax.xml.stream', name: 'stax-api', version: '1.0-2'
 
 
-
+    //updated jaxb dependencies but it creates weird errors
+    /*
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '4.0.1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '4.0.1'
+     */
 }
