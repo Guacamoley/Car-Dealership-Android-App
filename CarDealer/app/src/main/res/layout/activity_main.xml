@@ -21,8 +21,8 @@
 
     <ListView
         android:id="@+id/dealer_list"
-        android:layout_width="381dp"
-        android:layout_height="595dp"
+        android:layout_width="350dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
