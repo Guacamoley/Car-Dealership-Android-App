@@ -84,7 +84,23 @@ public class MainActivity extends AppCompatActivity {
                             // for security reasons, android will not return the file path
                             // it only returns a uri. so, we read the uri into a temp file
                             // and then pass the temp file to the inventory.importFile method.
+
                             // TODO: at this point, we'll need to check if the file type is json or xml and make the appropriate changes
+                            // this extracts the file type from the uri
+                            System.out.println(uri);
+
+                            String fileName = uri.getLastPathSegment();
+
+                            System.out.println(fileName);
+
+                            String[] nameSegments = fileName.split(".");
+                            int numSegments = nameSegments.length;
+                            String fileType = nameSegments[numSegments - 1];
+                            System.out.println(fileType);
+
+                            fileType = "json";
+
+
                             InputStream in = getContentResolver().openInputStream(uri);
                             File tempFile = File.createTempFile("temp.json", null, getCacheDir());
                             OutputStream out = new FileOutputStream(tempFile);
@@ -97,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                             out.close();
                             in.close();
 
-                            CarDealerApplication.INVENTORY.importFile(tempFile, "json");
+                            CarDealerApplication.INVENTORY.importFile(tempFile, fileType);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
