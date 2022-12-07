@@ -1,6 +1,5 @@
 package edu.metrostate.cardealer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +21,8 @@ public class VehicleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle);
+
+        // get extras passed from previous page and lookup car
         String dealerId = getIntent().getStringExtra("dealerId");
         String vehicleId = getIntent().getStringExtra("vehicleId");
         Car myCar = CarDealerApplication.INVENTORY.getCarById(dealerId, vehicleId);
@@ -32,17 +33,18 @@ public class VehicleActivity extends AppCompatActivity {
 
         // setup title
         TextView carTitle = findViewById(R.id.car_title);
-        carTitle.setText("Car ID " + myCar.getId());
+        carTitle.setText("Car ID " + myCar.getVehicle_id());
 
-        // setup buttons
+        // transfer button
         Button transferButton = findViewById(R.id.button_transfer);
         transferButton.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CarDealerApplication.INVENTORY.addIncomingVehicle(myCar);
+                // TODO
             }
         });
 
+        // delete button
         Button deleteButton = findViewById(R.id.button_delete_car);
         deleteButton.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
@@ -50,8 +52,21 @@ public class VehicleActivity extends AppCompatActivity {
                 CarDealerApplication.INVENTORY.removeIncomingVehicle(myCar);
             }
         });
+
+        // loaned switch
+        Switch loanedSwitch = findViewById(R.id.switch_loaned);
+        // this sets the switch to the correct state when you first load the page
+        loanedSwitch.setChecked(myCar.isLoaned());
+        loanedSwitch.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // i didn't think this would work, but it does
+                myCar.setLoaned(loanedSwitch.isChecked());
+            }
+        });
     }
 
+    // TODO
     @Override
     public void onBackPressed() {
 
