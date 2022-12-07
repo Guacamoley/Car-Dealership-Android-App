@@ -14,9 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class VehicleActivity extends AppCompatActivity {
 
-    Button car_button;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

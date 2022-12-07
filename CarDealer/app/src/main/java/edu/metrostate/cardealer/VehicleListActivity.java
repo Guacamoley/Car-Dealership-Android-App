@@ -1,11 +1,13 @@
 package edu.metrostate.cardealer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,15 +70,25 @@ public class VehicleListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 editTitle.setVisibility(View.VISIBLE);
+                editTitle.setText(dealership.getName());
                 saveButton.setVisibility(View.VISIBLE);
+                vehicleList.setVisibility(View.GONE);
 
             }
+
         });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dealership.setName(editTitle.getTransitionName());
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTitle.getWindowToken(), 0);
+                String temp = editTitle.getText().toString();
+                dealership.setName(temp);
+                adapter.notifyDataSetChanged();
+                saveButton.setVisibility(View.GONE);
+                editTitle.setVisibility(View.GONE);
+                vehicleList.setVisibility(View.VISIBLE);
             }
         });
 

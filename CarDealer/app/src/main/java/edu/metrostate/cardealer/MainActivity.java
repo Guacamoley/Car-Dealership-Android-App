@@ -16,12 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button exportButton;
-    Button importButton;
-
-
-    //This code is replaced by the Options Menu below
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO: grab the dealerId here, I think?
                 CarDealerApplication.selectedDealer = ad.getItem((int)l);
                 Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
+                intent.putExtra("dealer position", i);
                 startActivity(intent);
             }
         });
@@ -55,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
