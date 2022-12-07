@@ -1,5 +1,6 @@
 package edu.metrostate.cardealer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -7,12 +8,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,9 +35,20 @@ public class VehicleListActivity extends AppCompatActivity {
         String dealerId = getIntent().getStringExtra("dealerId");
         Dealership dealership = CarDealerApplication.INVENTORY.getDealerById(dealerId);
 
-        // Set title
-        TextView title = findViewById(R.id.title);
-        title.setText(dealership.getName());
+        //Set title
+        setTitle(dealership.getName());
+
+        //Set edit title text box
+        EditText editTitle = findViewById(R.id.title2);
+        editTitle.setVisibility(View.GONE);
+
+        //Set Edit Button
+        Button editButton = findViewById(R.id.editNameBtn);
+
+        //Set Save Button
+        Button saveButton = findViewById(R.id.button7);
+        saveButton.setVisibility(View.GONE);
+
 
         // export button, saves json to a single hardcoded location
         Button exportButton = findViewById(R.id.button_export);
@@ -67,26 +83,51 @@ public class VehicleListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTitle.setVisibility(View.VISIBLE);
+                editTitle.setText(dealership.getName());
+                saveButton.setVisibility(View.VISIBLE);
+                vehicleList.setVisibility(View.GONE);
+
+            }
+
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTitle.getWindowToken(), 0);
+                String temp = editTitle.getText().toString();
+                dealership.setName(temp);
+                adapter.notifyDataSetChanged();
+                saveButton.setVisibility(View.GONE);
+                editTitle.setVisibility(View.GONE);
+                vehicleList.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.test_menu, menu);
+        inflater.inflate(R.menu.dealer_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item2:
-                Toast.makeText(this, "Item 2 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Item 3 Selected", Toast.LENGTH_SHORT).show();
+            case R.id.switch1:
+                Toast.makeText(this, "Switch turned", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

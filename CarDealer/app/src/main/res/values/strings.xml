@@ -13,4 +13,8 @@
     <string name="button_edit_car">Edit Car</string>
     <string name="button_export_all">Export All</string>
     <string name="button_delete_car">Delete Car</string>
+    <string name="edit">Edit</string>
+    <string name="acquisition">Acquisition</string>
+    <string name="save">Save</string>
+    <string name="edit_name">Edit Name</string>
 </resources>

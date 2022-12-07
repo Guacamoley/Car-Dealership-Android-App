@@ -14,6 +14,7 @@ public class CarDealerApplication extends Application {
     //public static Dealership selectedDealer;
     //public static Car selectedCar;
 
+
     @Override
     public void onCreate() {
         super.onCreate();

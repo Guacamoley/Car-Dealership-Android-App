@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
                 // pass dealerId to the next screen
                 intent.putExtra("dealerId", ad.getItem((int)l).getDealershipId());
+                intent.putExtra("dealer position", i);
                 startActivity(intent);
             }
         });
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
