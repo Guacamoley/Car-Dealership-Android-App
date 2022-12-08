@@ -152,5 +152,5 @@ public class VehicleListActivity extends AppCompatActivity {
 
     }
 
-    }
+
 }
