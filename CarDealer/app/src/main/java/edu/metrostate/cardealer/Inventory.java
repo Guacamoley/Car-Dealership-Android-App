@@ -27,7 +27,7 @@ public class Inventory {
      */
     private final Json c = new Json();
 
-    //private final xmlDealers xml = new xmlDealers();
+    private final xmlDealers xml = new xmlDealers();
 
     // CONSTRUCTORS
 
@@ -51,9 +51,8 @@ public class Inventory {
         if (extension.matches("json"))
             return dc.addCars(c.readFile(file));
         else if (extension.matches("xml"))
-            //return dc.addCars(xml.xmlUnmarshal(file));
-            return null;
-        return null;
+            return dc.addCars(xml.xmlUnmarshal(file));
+        else return null;
     }
 
     /**

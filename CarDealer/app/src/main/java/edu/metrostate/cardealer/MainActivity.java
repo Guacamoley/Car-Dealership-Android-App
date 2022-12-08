@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +59,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: see export button inside the VehicleListActivity.java class
+                List<Dealership> allDealers = CarDealerApplication.INVENTORY.getAllDealerships();
+                List<Car> allCars = new ArrayList<>();
+
+                for (Dealership d:allDealers
+                     ) {
+                    List<Car> thoseCars = d.getCars();
+                    for (Car c:thoseCars
+                         ) {
+                        allCars.add(c);
+                    }
+                }
+
+                for (Car c:allCars
+                     ) {
+                    System.out.println(c.getVehicle_id() + " --- " + c.getDealership_id());
+                }
+
             }
         });
 
@@ -67,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 // this shows a file selector for all file types
                 // which ensures that json/xml files will appear
                 mGetContent.launch("*/*");
+                // TODO refresh data, but this doesn't work
+                //ad.notifyDataSetChanged();
+                //((DealerAdapter)ListViewDealer.getAdapter()).notifyDataSetChanged();
             }
         });
     }
@@ -84,11 +107,18 @@ public class MainActivity extends AppCompatActivity {
                             // for security reasons, android will not return the file path
                             // it only returns a uri. so, we read the uri into a temp file
                             // and then pass the temp file to the inventory.importFile method.
-                            // TODO: at this point, we'll need to check if the file type is json or xml and make the appropriate changes
-                            InputStream in = getContentResolver().openInputStream(uri);
-                            File tempFile = File.createTempFile("temp.json", null, getCacheDir());
-                            OutputStream out = new FileOutputStream(tempFile);
 
+                            // this extracts the file type from the uri by reading everything after the last "."
+                            String fileName = uri.getLastPathSegment();
+                            String[] nameSegments = fileName.split("\\.");
+                            int numSegments = nameSegments.length;
+                            String fileType = "json";
+                            if (numSegments > 0) fileType = nameSegments[numSegments - 1];
+
+                            // stream file into a temp file
+                            InputStream in = getContentResolver().openInputStream(uri);
+                            File tempFile = File.createTempFile("temp." + fileType, null, getCacheDir());
+                            OutputStream out = new FileOutputStream(tempFile);
                             byte[] buf = new byte[1024];
                             int len;
                             while ((len = in.read(buf)) > 0) {
@@ -97,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                             out.close();
                             in.close();
 
-                            CarDealerApplication.INVENTORY.importFile(tempFile, "json");
+                            // feed temp file to inventory importer
+                            CarDealerApplication.INVENTORY.importFile(tempFile, fileType);
+                            System.out.println("Loaded file type " + fileType + " size " + tempFile.length());
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
