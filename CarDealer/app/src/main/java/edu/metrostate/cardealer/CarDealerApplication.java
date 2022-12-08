@@ -33,6 +33,8 @@ public class CarDealerApplication extends Application {
             INVENTORY.addIncomingVehicle(c);
         }
 
+        // TODO load saved data
+        //mGetContent.launch("*/*");
     }
 
     public List<Car> getVehicleList(String dealerId) {

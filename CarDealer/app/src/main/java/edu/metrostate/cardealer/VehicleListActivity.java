@@ -35,8 +35,12 @@ public class VehicleListActivity extends AppCompatActivity {
         String dealerId = getIntent().getStringExtra("dealerId");
         Dealership dealership = CarDealerApplication.INVENTORY.getDealerById(dealerId);
 
+        //set AddCarButton
+        Button addCarButton = findViewById(R.id.button_add_car);
+
         //Set title
-        setTitle(dealership.getName());
+        if (dealership != null) setTitle(dealership.getName());
+        else setTitle("Unknown dealership");
 
         //Set edit title text box
         EditText editTitle = findViewById(R.id.title2);
@@ -110,7 +114,15 @@ public class VehicleListActivity extends AppCompatActivity {
             }
         });
 
+        addCarButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (VehicleListActivity.this, AddCarActivity.class );
+                startActivity(intent);
+
+            }
+        });
 
 
     }
