@@ -100,5 +100,8 @@ public class Dealership {
 
     public void setName(String name) {
         this.name = name;
+        for (Car a : cars) {
+            a.setDealerName(name);
+        }
     }
 }

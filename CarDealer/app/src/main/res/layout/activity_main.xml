@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/dealer_title"
         android:layout_width="148dp"
@@ -13,6 +14,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="16dp"
         android:text="@string/title_dealers"
+        android:textColor="#263238"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
@@ -21,33 +23,38 @@
 
     <ListView
         android:id="@+id/dealer_list"
-        android:layout_width="381dp"
-        android:layout_height="595dp"
+        android:layout_width="348dp"
+        android:layout_height="578dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dealer_title"
         app:layout_constraintVertical_bias="0.103" />
 
+
     <Button
         android:id="@+id/button_import"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/button_import"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_export_all"
+        app:layout_constraintTop_toBottomOf="@+id/dealer_list"
+        app:layout_constraintVertical_bias="0.305" />
 
     <Button
         android:id="@+id/button_export_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/button_export_all"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/button_import"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dealer_list"
+        app:layout_constraintVertical_bias="0.305" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

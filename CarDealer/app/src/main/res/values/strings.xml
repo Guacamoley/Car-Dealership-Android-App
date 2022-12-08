@@ -17,5 +17,8 @@
     <string name="acquisition">Acquisition</string>
     <string name="save">Save</string>
     <string name="edit_name">Edit Name</string>
+    <string name="acquire">Acquire</string>
+    <string name="dealer_name_hint">Dealer Name</string>
     <string name="title">Add Car</string>
+
 </resources>
