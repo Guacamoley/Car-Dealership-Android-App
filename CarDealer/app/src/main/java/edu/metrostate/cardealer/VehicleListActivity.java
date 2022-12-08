@@ -2,26 +2,22 @@ package edu.metrostate.cardealer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class VehicleListActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +44,16 @@ public class VehicleListActivity extends AppCompatActivity {
         //Set Save Button
         Button saveButton = findViewById(R.id.button7);
         saveButton.setVisibility(View.GONE);
+
+        //Set On/Off for Acquire Button
+        Button acqButton = findViewById(R.id.acqButton);
+
+        if (dealership.isAcquireEnabled()) {
+            acqButton.setTextColor(Color.parseColor("#6101ea"));
+        }
+        else {
+            acqButton.setTextColor(Color.parseColor("#828281"));
+        }
 
 
         // export button, saves json to a single hardcoded location
@@ -91,10 +97,10 @@ public class VehicleListActivity extends AppCompatActivity {
                 editTitle.setText(dealership.getName());
                 saveButton.setVisibility(View.VISIBLE);
                 vehicleList.setVisibility(View.GONE);
-
             }
 
         });
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,36 +109,30 @@ public class VehicleListActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(editTitle.getWindowToken(), 0);
                 String temp = editTitle.getText().toString();
                 dealership.setName(temp);
-                adapter.notifyDataSetChanged();
                 saveButton.setVisibility(View.GONE);
                 editTitle.setVisibility(View.GONE);
                 vehicleList.setVisibility(View.VISIBLE);
+                setTitle(temp);
+                Toast.makeText(app, "Name updated", Toast.LENGTH_SHORT).show();
             }
         });
 
+        acqButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dealership.isAcquireEnabled()) {
+                    dealership.setAcquireEnabled(false);
+                    acqButton.setTextColor(Color.parseColor("#828281"));
+                    Toast.makeText(app, "Acquire disabled", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    dealership.setAcquireEnabled(true);
+                    acqButton.setTextColor(Color.parseColor("#6101ea"));
+                    Toast.makeText(app, "Acquire enabled", Toast.LENGTH_SHORT).show();
 
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dealer_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.switch1:
-                Toast.makeText(this, "Switch turned", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                }
+            }
+        });
 
     }
-
 }
