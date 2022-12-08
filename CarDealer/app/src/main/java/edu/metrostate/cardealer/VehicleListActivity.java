@@ -51,14 +51,12 @@ public class VehicleListActivity extends AppCompatActivity {
 
         //Set On/Off for Acquire Button
         Button acqButton = findViewById(R.id.acqButton);
-
-        if (dealership.isAcquireEnabled()) {
+        if (dealership != null && dealership.isAcquireEnabled()) {
             acqButton.setTextColor(Color.parseColor("#6101ea"));
         }
         else {
             acqButton.setTextColor(Color.parseColor("#828281"));
         }
-
 
         // export button, saves json to a single hardcoded location
         Button exportButton = findViewById(R.id.button_export);
@@ -82,7 +80,6 @@ public class VehicleListActivity extends AppCompatActivity {
         // Find the list view and add the adapter
         ListView vehicleList = findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(adapter);
-
         vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,7 +102,6 @@ public class VehicleListActivity extends AppCompatActivity {
 
         });
 
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +116,6 @@ public class VehicleListActivity extends AppCompatActivity {
                 Toast.makeText(app, "Name updated", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         acqButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +135,6 @@ public class VehicleListActivity extends AppCompatActivity {
         });
         
         addCarButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (VehicleListActivity.this, AddCarActivity.class );

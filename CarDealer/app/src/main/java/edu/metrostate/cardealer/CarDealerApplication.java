@@ -12,15 +12,14 @@ import java.util.List;
 
 public class CarDealerApplication extends Application {
     public static final Inventory INVENTORY = new Inventory();
-    //public static Dealership selectedDealer;
-    //public static Car selectedCar;
     public static final String SAVE_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/dealers.json";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // TODO: this is sample data. remove this eventually.
+        // add sample data for testing
+        /*
         ArrayList<Car> sampleData = new ArrayList<Car>();
         sampleData.add(new Car("12513", "suv", "Ford", "Explorer", "48934j", 20123d, 1515354694451l, "", "", false));
         sampleData.add(new Car("12513", "sedan", "Tesla", "Model 3", "83883", 50444d, 1515354694451l, "", "", false));
@@ -33,8 +32,9 @@ public class CarDealerApplication extends Application {
         for (Car c : sampleData){
             INVENTORY.addIncomingVehicle(c);
         }
+         */
 
-        // TODO load saved data
+        // load saved data
         File saveFile = new File(SAVE_PATH);
         if (saveFile.isFile()) INVENTORY.importFile(saveFile, "json");
     }
@@ -47,7 +47,6 @@ public class CarDealerApplication extends Application {
     }
 
     public void writeFile() {
-
         //TODO: Remove this code
         // Gets the output path which is /sdcard/Android/data/edu.metrostate.cardealer/files directory
         File externalDir = getExternalFilesDir(null);

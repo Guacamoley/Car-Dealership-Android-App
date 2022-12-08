@@ -1,5 +1,6 @@
 package edu.metrostate.cardealer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,11 +37,14 @@ public class VehicleActivity extends AppCompatActivity {
         carTitle.setText("Car ID " + myCar.getVehicle_id());
 
         // transfer button
-        Button transferButton = findViewById(R.id.button_transfer);
-        transferButton.setOnClickListener(new AdapterView.OnClickListener() {
+        Button transferCarButton = findViewById(R.id.button_transfer);
+        transferCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                Intent intent = new Intent (VehicleActivity.this, transferCarActivity.class );
+                intent.putExtra("currentDealerId", dealerId);
+                intent.putExtra("vehicleId", vehicleId);
+                startActivity(intent);
             }
         });
 
@@ -65,39 +69,4 @@ public class VehicleActivity extends AppCompatActivity {
             }
         });
     }
-
-    // TODO
-    @Override
-    public void onBackPressed() {
-
-
-        super.onBackPressed();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.vehicle_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(this, "Item 1 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item2:
-                Toast.makeText(this, "Item 2 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Item 3 Selected", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-
 }
