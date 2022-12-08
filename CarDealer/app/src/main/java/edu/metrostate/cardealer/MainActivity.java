@@ -3,6 +3,7 @@ package edu.metrostate.cardealer;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         DealerAdapter ad = new DealerAdapter(this, app.getDealerList());
         ListViewDealer.setAdapter(ad);
 
-
         ListViewDealer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -54,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // export all button
+        // export all button - saves everything to an external json file, which will be loaded on add startup
         Button exportAllButton = findViewById(R.id.button_export_all);
         exportAllButton.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: see export button inside the VehicleListActivity.java class
+                CarDealerApplication.INVENTORY.exportSession(CarDealerApplication.SAVE_PATH);
+
+                // debugging code, which prints to console all cars' vehicleId and dealerId
+                /*
                 List<Dealership> allDealers = CarDealerApplication.INVENTORY.getAllDealerships();
                 List<Car> allCars = new ArrayList<>();
 
@@ -71,12 +74,11 @@ public class MainActivity extends AppCompatActivity {
                         allCars.add(c);
                     }
                 }
-
                 for (Car c:allCars
                      ) {
                     System.out.println(c.getVehicle_id() + " --- " + c.getDealership_id());
                 }
-
+                 */
             }
         });
 
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 // this shows a file selector for all file types
                 // which ensures that json/xml files will appear
                 mGetContent.launch("*/*");
+
                 // TODO refresh data, but this doesn't work
                 //ad.notifyDataSetChanged();
                 //((DealerAdapter)ListViewDealer.getAdapter()).notifyDataSetChanged();

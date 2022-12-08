@@ -20,5 +20,5 @@
     <string name="acquire">Acquire</string>
     <string name="dealer_name_hint">Dealer Name</string>
     <string name="title">Add Car</string>
-
+    <string name="title2">Transfer Car</string>
 </resources>

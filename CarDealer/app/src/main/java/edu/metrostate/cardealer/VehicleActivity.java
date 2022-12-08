@@ -1,5 +1,6 @@
 package edu.metrostate.cardealer;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,11 +72,14 @@ public class VehicleActivity extends AppCompatActivity {
 
 
         // transfer button
-        Button transferButton = findViewById(R.id.button_transfer);
-        transferButton.setOnClickListener(new AdapterView.OnClickListener() {
+        Button transferCarButton = findViewById(R.id.button_transfer);
+        transferCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                Intent intent = new Intent (VehicleActivity.this, transferCarActivity.class );
+                intent.putExtra("currentDealerId", dealerId);
+                intent.putExtra("vehicleId", vehicleId);
+                startActivity(intent);
             }
         });
 
