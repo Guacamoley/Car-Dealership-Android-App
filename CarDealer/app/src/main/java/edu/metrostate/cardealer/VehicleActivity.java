@@ -1,13 +1,17 @@
 package edu.metrostate.cardealer;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +37,39 @@ public class VehicleActivity extends AppCompatActivity {
         carData.setText(myCar.toString());
 
         // setup title
-        TextView carTitle = findViewById(R.id.car_title);
-        carTitle.setText("Car ID " + myCar.getVehicle_id());
+        setTitle("Car ID " + myCar.getVehicle_id());
+
+        //set up edit screen
+        EditText editCar = findViewById(R.id.car_id_edit);
+        editCar.setVisibility(View.GONE);
+
+        //set up save button
+        Button saveCarId = findViewById(R.id.save_car_id);
+        saveCarId.setVisibility(View.GONE);
+        saveCarId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myCar.setVehicle_id(editCar.getText().toString());
+                editCar.setVisibility(View.GONE);
+                saveCarId.setVisibility(View.GONE);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editCar.getWindowToken(), 0);
+                Toast.makeText(VehicleActivity.this, "Vehicle ID updated", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //set up edit button
+        Button editButton = findViewById(R.id.button_edit_car);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editCar.setText(myCar.getVehicle_id());
+                editCar.setVisibility(View.VISIBLE);
+                saveCarId.setVisibility(View.VISIBLE);
+            }
+        });
+
 
         // transfer button
         Button transferCarButton = findViewById(R.id.button_transfer);
@@ -64,7 +99,6 @@ public class VehicleActivity extends AppCompatActivity {
         loanedSwitch.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // i didn't think this would work, but it does
                 myCar.setLoaned(loanedSwitch.isChecked());
             }
         });
