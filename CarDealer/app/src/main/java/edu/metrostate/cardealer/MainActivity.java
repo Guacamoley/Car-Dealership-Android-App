@@ -3,6 +3,7 @@ package edu.metrostate.cardealer;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
         exportAllButton.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: see export button inside the VehicleListActivity.java class
+                CarDealerApplication.INVENTORY.exportSession(CarDealerApplication.SAVE_PATH);
+
+                // TODO: remove debugging code, which prints to console all cars' vehicleId and dealerId
                 List<Dealership> allDealers = CarDealerApplication.INVENTORY.getAllDealerships();
                 List<Car> allCars = new ArrayList<>();
 
@@ -71,12 +74,10 @@ public class MainActivity extends AppCompatActivity {
                         allCars.add(c);
                     }
                 }
-
                 for (Car c:allCars
                      ) {
                     System.out.println(c.getVehicle_id() + " --- " + c.getDealership_id());
                 }
-
             }
         });
 

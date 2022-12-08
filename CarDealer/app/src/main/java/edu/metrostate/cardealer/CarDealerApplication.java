@@ -1,6 +1,7 @@
 package edu.metrostate.cardealer;
 
 import android.app.Application;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class CarDealerApplication extends Application {
     public static final Inventory INVENTORY = new Inventory();
     //public static Dealership selectedDealer;
     //public static Car selectedCar;
-
+    public static final String SAVE_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/dealers.json";
 
     @Override
     public void onCreate() {
@@ -34,7 +35,8 @@ public class CarDealerApplication extends Application {
         }
 
         // TODO load saved data
-        //mGetContent.launch("*/*");
+        File saveFile = new File(SAVE_PATH);
+        if (saveFile.isFile()) INVENTORY.importFile(saveFile, "json");
     }
 
     public List<Car> getVehicleList(String dealerId) {

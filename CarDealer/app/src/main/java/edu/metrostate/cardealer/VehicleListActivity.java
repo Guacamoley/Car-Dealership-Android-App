@@ -65,7 +65,7 @@ public class VehicleListActivity extends AppCompatActivity {
         exportButton.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fileName = "test2.json";
+                String fileName = dealerId + ".json";
                 // saves files to the shared public documents directory
                 String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
 
@@ -151,6 +151,4 @@ public class VehicleListActivity extends AppCompatActivity {
 
 
     }
-
-
 }
